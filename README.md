@@ -10,6 +10,11 @@ This is my personal **developer portfolio** built with **React** and **Tailwind 
 - ⚡ Vite  
 - 📁 Deployed via GitHub Pages / Vercel / Netlify *(configure as needed)*
 
+## 🌐 Live Demo
+
+🔗 [View Portfolio](https://jaspPankaj.github.io/portfolio/)
+
+
 ## 📸 Screenshots
 
 ![Portfolio Screenshot](./public/projects/project1.png)
