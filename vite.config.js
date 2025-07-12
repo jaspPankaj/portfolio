@@ -10,7 +10,8 @@ export default defineConfig({
     alias:{
       "@":Path.resolve(__dirname,"./src")
     }
-  }
+  },
+  base: '/portfolio/',
 })
 
 
