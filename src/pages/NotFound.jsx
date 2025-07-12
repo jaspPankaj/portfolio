@@ -1,6 +1,7 @@
 
 export const NotFound = () => {
     return <div>
-        NOT FOunt PAGE
+        <StarBackground />
+        Not  Found Page
     </div>
 };

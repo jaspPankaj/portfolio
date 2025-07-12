@@ -6,7 +6,7 @@ const projects = [
     id: 1,
     title: "Portfolio Website",
     description: "Made a portfolio by using react and tailwind.",
-    image: "/projects/project1.png",
+    image: "/portfolio/projects/project1.png",
     tags: ["React", "Tailwind", "Portfolio"],
     demoUrl: "#",
     githubUrl: "#"
@@ -15,7 +15,7 @@ const projects = [
     id: 2,
     title: "Expense Tracker",
     description: "Made a expense tracker app by using asp.net mvc and c#",
-    image: "/projects/project2.jfif",
+    image: "/portfolio/projects/project2.jfif",
     tags: ["ASP.NET", "MVC", "SQL Server", "C#"],
     demoUrl: "#",
     githubUrl: "#"
@@ -24,7 +24,7 @@ const projects = [
     id: 3,
     title: "Capsons Website",
     description: "made an informative website for capsons.com by using Wordpress.",
-    image: "/projects/project3.png",
+    image: "/portfolio/projects/project3.png",
     tags: ["Wordpress", "cPanel", "Website"],
     demoUrl: "#",
     githubUrl: "#"
@@ -33,7 +33,7 @@ const projects = [
 
 export const ProjectsSection = () => {
   return (
-    <section id="projects" className="py-24 px-4 relative">
+    <section id="project" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-5xl ">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
           Featured <span className="text-primary">Projects  </span>
