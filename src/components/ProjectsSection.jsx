@@ -6,16 +6,16 @@ const projects = [
     id: 1,
     title: "Portfolio Website",
     description: "Made a portfolio by using react and tailwind.",
-    image: "/portfolio/projects/project1.png",
+    image: "projects/project1.png",
     tags: ["React", "Tailwind", "Portfolio"],
     demoUrl: "#",
-    githubUrl: "#"
+    githubUrl: "https://github.com/jaspPankaj/portfolio"
   },
   {
     id: 2,
     title: "Expense Tracker",
     description: "Made a expense tracker app by using asp.net mvc and c#",
-    image: "/portfolio/projects/project2.jfif",
+    image: "projects/project2.jfif",
     tags: ["ASP.NET", "MVC", "SQL Server", "C#"],
     demoUrl: "#",
     githubUrl: "#"
@@ -24,9 +24,9 @@ const projects = [
     id: 3,
     title: "Capsons Website",
     description: "made an informative website for capsons.com by using Wordpress.",
-    image: "/portfolio/projects/project3.png",
+    image: "projects/project3.png",
     tags: ["Wordpress", "cPanel", "Website"],
-    demoUrl: "#",
+    demoUrl: "https://capsons.com/",
     githubUrl: "#"
   },
 ];
