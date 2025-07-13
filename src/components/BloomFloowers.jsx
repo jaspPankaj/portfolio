@@ -17,7 +17,7 @@ export const BloomFlowers = () => {
 
   //generate Flowers
   const generateFlowers = () => {
-      const flowerCount = 20;
+      const flowerCount = 10;
       const newFlowers = [];
 
       for (let i = 0; i < flowerCount; i++) {
@@ -38,7 +38,7 @@ export const BloomFlowers = () => {
       {flowers.map((flower) => (
         <div
           key={flower.id}
-          className="absolute text-pink-400/60 animate-bloom"
+          className="absolute text-pink-400 animate-bloom"
           style={{
             left: flower.left + "%",
             top: flower.top +"%",
