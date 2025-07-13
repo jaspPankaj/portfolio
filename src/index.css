@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 @theme {
   --color-border:hsl(var(--border));
   --color-background:hsl(var(--background));
@@ -20,6 +19,7 @@
 --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
 --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
 --animate-meteor: meteor 5s linear infinite;
+--animate-bloom: bloom 6s ease-in-out infinite;
 
 @keyframes float {
   
@@ -80,6 +80,23 @@
       opacity: 0;
   }
 }
+
+@keyframes bloom {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+
 }
 
 @layer base{
@@ -147,9 +164,9 @@
 
 }
 
-@utility text-glow{
-  @aplly relative;
-  text-shadow:0 0 10px rgba(167,139,250,0.5);
+@utility text-glow {
+  @apply relative;
+  text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
 }
 
 @utility card-hover{
@@ -177,6 +194,13 @@
   @apply absolute bg-linear-to-r from-white via-white to-transparent rounded-full;
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
 }
+
+@utility bloom {
+  @apply absolute;
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
+  opacity: 0.4;
+}
+
 
 #root{
   max-width: 100%;

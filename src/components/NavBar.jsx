@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { cn } from "../lib/util";
 import{ X, Menu } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
+import { MobileThemeToggle } from "./MobileThemeToggle";
+
 
 const navItems = [
     { name: "Home", href: "#hero" },
@@ -30,7 +33,7 @@ export const NavBar = () => {
     return (
         <nav className={cn(
             "fixed w-full z-40 transition-all duration-300",
-            isScrolled ? "py-3 bg-background/80 background-blur-md shadow-xs" : "py-5"
+            isScrolled ? "py-4 bg-background/80 background-blur-md shadow-xs" : "py-5"
 
         )}>
             {/* Destop Version */}
@@ -47,10 +50,14 @@ export const NavBar = () => {
                             {item.name}
                         </a>
                     ))}
+                    <ThemeToggle />
                 </div>
+                
+                
+                <MobileThemeToggle />
 
                 <button onClick={()=> setIsMenuOpen((prev) => !prev)}
-                        className="md:hidden p-2 text-foreground z-50">
+                        className="md:hidden p-2 text-foreground z-40">
                     {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>    
                 {/* Mobile Version */} 

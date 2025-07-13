@@ -7,15 +7,13 @@ import { SkillsSection } from "../components/SkillsSection";
 import { ProjectsSection } from "../components/ProjectsSection";
 import { ContactSection } from "../components/ContactSection";
 import { Footer } from "../components/Footer";
-
-
+import { BloomFlowers } from "../components/BloomFloowers";
 export const Home = () => {
     return <div className="min-h-screen bg-background text-forehead overflow_x_hidden">
 
-        {/* Theme Toggele Code */}
-        <ThemeToggle />
         {/* Background Effact Code */}
         <StarBackground />
+        {/* <BloomFlowers /> */}
         {/* Nav Bar  Code */}
         <NavBar />
         {/* Main Content Code */}

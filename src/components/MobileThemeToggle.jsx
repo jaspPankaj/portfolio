@@ -2,7 +2,7 @@ import { useState,useEffect } from "react";
 import{ Moon, Sun } from "lucide-react";
 import { cn } from "../lib/util";
 
-export const ThemeToggle = () => {
+export const MobileThemeToggle = () => {
 
     const [isDarkMode ,setIsDarkMode] = useState(false);
 
@@ -35,7 +35,7 @@ export const ThemeToggle = () => {
     };
 
      return <button onClick={toggleThem} 
-                   className={ cn( "fixed max-sm:hidden top-3 right-5 z-50 p-2",
+                   className={ cn( "fixed md:hidden top-4 right-20 z-50 p-2",
                                    "round-full transition-color duration-300",
                                    "focus:outline-hidden"
 
