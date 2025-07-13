@@ -50,11 +50,7 @@ export const NavBar = () => {
                             {item.name}
                         </a>
                     ))}
-                    <ThemeToggle />
                 </div>
-                
-                
-                <MobileThemeToggle />
 
                 <button onClick={()=> setIsMenuOpen((prev) => !prev)}
                         className="md:hidden p-2 text-foreground z-40">

@@ -11,6 +11,7 @@ import { BloomFlowers } from "../components/BloomFloowers";
 export const Home = () => {
     return <div className="min-h-screen bg-background text-forehead overflow_x_hidden">
 
+        <ThemeToggle />
         {/* Background Effact Code */}
         <StarBackground />
         {/* <BloomFlowers /> */}
