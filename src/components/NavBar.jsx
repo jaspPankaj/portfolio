@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { cn } from "../lib/util";
 import{ X, Menu } from "lucide-react";
-import { ThemeToggle } from "./ThemeToggle";
-import { MobileThemeToggle } from "./MobileThemeToggle";
+
 
 
 const navItems = [
