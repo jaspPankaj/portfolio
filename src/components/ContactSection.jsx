@@ -47,36 +47,36 @@ export const ContactSection = () =>{
                 <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
 
                 <div className="space-y-6 justify-center">
-                    <div className="flex item-start space-x-4">
+                    <div className="flex item-start space-x-4 bg-foreground/10 p-4 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105">
                         <div className="p-3 rounded-full bg-primary/10">
                             <Mail className="h-6 w-6 text-primary"/>
                         </div>
                         <div>
-                            <h4 className="font-medium">Email</h4>
+                            <h4 className="font-medium text-left">Email</h4>
                             <a href="mailto:jasp.pankaj@gmail.com"
                                 className="text-muted-foreground hover:text-primary transition-colors">
                                 jasp.pankaj@gmail.com
                             </a>
                         </div>
                     </div>
-                    <div className="flex item-start space-x-4">
+                    <div className="flex item-start space-x-4 bg-foreground/10 p-4 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105">
                         <div className="p-3 rounded-full bg-primary/10">
                             <Phone className="h-6 w-6 text-primary"/>
                         </div>
                         <div>
-                            <h4 className="font-medium">Mobile No.</h4>
+                            <h4 className="font-medium text-left">Mobile No.</h4>
                             <a href="tel:+918587893419"
                                 className="text-muted-foreground hover:text-primary transition-colors">
                                 +91 8587893419
                             </a>
                         </div>
                     </div>
-                    <div className="flex item-start space-x-4">
+                    <div className="flex item-start space-x-4 bg-foreground/10 p-4 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105">
                         <div className="p-3 rounded-full bg-primary/10">
                             <MapPin className="h-6 w-6 text-primary"/>
                         </div>
                         <div>
-                            <h4 className="font-medium">Location</h4>
+                            <h4 className="font-medium text-left">Location</h4>
                             <a className="text-muted-foreground hover:text-primary transition-colors">
                                 Noida, India.
                             </a>
@@ -86,18 +86,18 @@ export const ContactSection = () =>{
 
                 <div className="pt-8">
                     <h4 className="font-medium mb-4">Connect With Me</h4>
-                    <div className="flex justify-center space-x-4">
+                    <div className="flex justify-center space-x-4" >
                         <a href="https://www.linkedin.com/in/jasppankaj/" target="_blank"
-                            className="">
-                            <Linkedin />
+                           className="rounded-xs  transition-all duration-300 ease-in-out hover:scale-110 hover:bg-[#0A66C2]">
+                            <Linkedin/>
                         </a>
                         <a href="https://github.com/jasppankaj" target="_blank"
                             className="">
-                            <Github />
+                            <Github size={24}/>
                         </a>
                         <a href="https://www.youtube.com/@JaspPankaj" target="_blank"
-                            className="">
-                            <Youtube />
+                            className="rounded-xs  transition-all duration-300 ease-in-out hover:scale-110 hover:bg-[#FF0000]">
+                            <Youtube size={24}/>
                         </a>
                     </div>
                 </div>
