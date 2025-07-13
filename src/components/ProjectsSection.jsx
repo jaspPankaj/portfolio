@@ -5,27 +5,27 @@ const projects = [
   {
     id: 1,
     title: "Portfolio Website",
-    description: "Made a portfolio by using react and tailwind.",
+    description: "I’ve built a responsive, modern portfolio that highlights my frontend development skills with React and Tailwind CSS.",
     image: "projects/project1.png",
-    tags: ["React", "Tailwind", "Portfolio"],
+    tags: ["React", "Tailwind"],
     demoUrl: "#",
     githubUrl: "https://github.com/jaspPankaj/portfolio"
   },
   {
     id: 2,
     title: "Expense Tracker",
-    description: "Made a expense tracker app by using asp.net mvc and c#",
-    image: "projects/project2.jfif",
-    tags: ["ASP.NET", "MVC", "SQL Server", "C#"],
+    description: " developed a dynamic and responsive Expense Tracker web application that enables users to manage their finances effectively while providing visual analytics using Syncfusion.",
+    image: "projects/project2.png",
+    tags: ["ASP.NET", "SQL Server","Syncfusion"],
     demoUrl: "#",
     githubUrl: "#"
   },
   {
     id: 3,
     title: "Capsons Website",
-    description: "made an informative website for capsons.com by using Wordpress.",
+    description: "Capsons Website – Designed and developed the responsive website for Capsons Co., a global leather apparel manufacturer. Focused on clean UI, mobile responsiveness, and service-oriented layout using Wordpress.",
     image: "projects/project3.png",
-    tags: ["Wordpress", "cPanel", "Website"],
+    tags: ["Wordpress", "cPanel", "HTML","CSS"],
     demoUrl: "https://capsons.com/",
     githubUrl: "#"
   },
@@ -73,7 +73,7 @@ export const ProjectsSection = () => {
                 <h2 className="text-xl font-semibold mb-1">{project.title}</h2>
 
                 {/* Project Description */}
-                <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
+                <p className="text-muted-foreground text-sm mb-4 text-justify">{project.description}</p>
 
                 {/* Project Links */}
                 <div className="flex justify-between items-center">
