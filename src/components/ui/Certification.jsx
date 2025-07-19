@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 
 import { useEffect, useState } from "react";
 
+
 export const Certification = ({
     certificates,
     autoplay = false
@@ -35,7 +36,7 @@ export const Certification = ({
     };
     return (
         <div
-            className="mx-auto max-w-sm px-4 py-5 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
+            className="mx-auto max-w-sm px-4 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
             <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
                 <div>
                     <div className="relative h-80 w-full">
@@ -76,7 +77,7 @@ export const Certification = ({
                                         width={500}
                                         height={500}
                                         draggable={false}
-                                        className="h-full w-full rounded-3xl object-cover object-center" />
+                                        className="h-full w-full rounded-3xl object-center" />
                                 </motion.div>
                             ))}
                         </AnimatePresence>
@@ -94,6 +95,12 @@ export const Certification = ({
                             <IconArrowRight
                                 className="h-6 w-6 text-foreground transition-transform duration-300 group-hover/button:-rotate-12" />
                         </button>
+                    </div>
+                    <div className="mt-8">
+                        <a className="cosmic-button w-fit flex items-center mx-auto gap-2"
+                            href={certificates[active].url} target="_blank">
+                            Click To View<ExternalLink size={16} />
+                        </a>
                     </div>
                 </div>
 
@@ -119,11 +126,24 @@ export const Certification = ({
                         <h3 className="text-2xl font-bold text-foreground">
                             {certificates[active].name}
                         </h3>
-                        <p className="text-lg font-semibold text-primary">
-                            {certificates[active].designation}
+                        <p className="text-lg font-semibold text-primary mt-2">
+                            {certificates[active].issuedBy}
                         </p>
-                        <motion.p className="mt-8 text-lg text-foreground ">
-                            {certificates[active].quote.split(" ").map((word, index) => (
+                        <div className="mt-4">
+                            <div className="flex flex-wrap gap-2">
+                                {certificates[active].skills.map((skill, index) => (
+                                    <span
+                                        key={index}
+                                        className="px-2 py-1 text-xs font-medium border rounded-full bg-muted text-muted-foreground"
+                                    >
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+
+                        <motion.p className="text-lg text-foreground mt-4">
+                            {certificates[active].description.split(" ").map((word, index) => (
                                 <motion.span
                                     key={index}
                                     initial={{
@@ -147,28 +167,8 @@ export const Certification = ({
                             ))}
                         </motion.p>
                     </motion.div>
-                    {/* <div className="p-6">
-                        <div className="flex flex-wrap gap-2 mb-4">
-                            {certificates[active].url.map((tag, index) => (
-                                <span
-                                    key={index}
-                                    className="px-2 py-1 text-xs font-medium border rounded-full bg-muted text-muted-foreground"
-                                >
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
-                    </div> */}
-                        <div className="mt-4">
-                            <a className="cosmic-button w-fit flex items-center mx-auto gap-2"
-                                href={certificates[active].url} target="_blank">
-                                Click To Verify<ExternalLink size={16} />
-                            </a>
-                        </div>
-
-
-                    </div>
                 </div>
             </div>
-            );
+        </div>
+    );
 };

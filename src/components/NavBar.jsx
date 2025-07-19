@@ -58,7 +58,7 @@ export const NavBar = () => {
                 </button>    
                 {/* Mobile Version */} 
                 <div className={cn(
-                    "fixed inset-0 bg-background/95 background-blur-md z-40 flex flex-col items-center",
+                    "fixed inset-0 bg-background/95 background-blur-md z-1000 flex flex-col items-center",
                     "justify-center transition-all duration-300 md:hidden",
                     isMenuOpen ?
                         "opacity-100 pointer-events-auto" :
