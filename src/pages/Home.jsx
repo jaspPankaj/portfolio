@@ -7,23 +7,32 @@ import { SkillsSection } from "../components/SkillsSection";
 import { ProjectsSection } from "../components/ProjectsSection";
 import { ContactSection } from "../components/ContactSection";
 import { Footer } from "../components/Footer";
-import { BloomFlowers } from "../components/BloomFloowers";
+import { ParticleBackground } from "../components/ParticleBackground";
+import { BackgroundLines } from "../components/BackgroundLines";
+import { Certification } from "../components/ui/Certification";
+import { CertificationSection } from "../components/CertificationSection";
+
 export const Home = () => {
     return <div className="min-h-screen bg-background text-forehead overflow_x_hidden">
 
         <ThemeToggle />
         {/* Background Effact Code */}
-        <StarBackground />
-        {/* <BloomFlowers /> */}
+        {/* <StarBackground /> */}
+        <ParticleBackground />
+        {/* <BackgroundLines /> */}
+
         {/* Nav Bar  Code */}
         <NavBar />
         {/* Main Content Code */}
         <main>
+            
             <HeroSection />
             <AboutSection />
             <SkillsSection/>
             <ProjectsSection />
+            <CertificationSection />
             <ContactSection />
+            
         </main>
         {/* Footer Code */}
             <Footer />
