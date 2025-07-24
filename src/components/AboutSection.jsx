@@ -14,17 +14,18 @@ export const AboutSection = () =>{
                     <h3 className="text-2xl font-semibold">Passionate Full Stack Developer</h3>
 
                     <p className="text-muted-foreground">
-                        i am working since 2015 on diffrent technologies
-                        and i am still learning few of them.
+                        Full Stack Web Developer with over 6 years of experience building efficient, 
+                        secure, and user-focused web applications.
                     </p>
 
                     <p className="text-muted-foreground">
-                        i can use so many technology to develope 
-                        diffrent things that i do with all my intrest.
+                        I specialize in ASP.NET MVC, Django, and Python, and I enjoy bringing ideas to life 
+                        through clean code and intuitive UI/UX. Over the years, I’ve built everything from 
+                        e-commerce platforms and CMS integrations to full-stack dashboards and REST APIs.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
                         <a href="#contact" className="cosmic-button"> Get In Touch</a>
-                        <a href="#" className={cn("px-6 py-2 rounded-full border border-primary",
+                        <a href="resume/Pankaj_Kumar_Resume_2025.pdf" target="_blank" className={cn("px-6 py-2 rounded-full border border-primary",
                                                     "text-primary hover:bg-primary/40 transition-all duration-300"
                         )}> Download Resume</a>
                     </div>

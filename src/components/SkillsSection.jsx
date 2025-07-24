@@ -51,14 +51,14 @@ export const SkillsSection = () => {
                 ))}
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 {filterSkills.map((skill, id) => (
                     <div key={id} className={cn("flex flex-col justify-center items-center  bg-primary/20 rounded-lg shadow-xs",
                                                 "transition-all duration-300 ease-in-out transform", 
                                                 "hover:scale-110 hover:shadow-md hover:shadow-primary hover:border-primary hover:border-1")}>
 
                         {/* Image */}
-                        <div className="w-24 h-24 overflow-hidden rounded-lg p-2 flex items-center justify-center">
+                        <div className="w-16 h-16 overflow-hidden rounded-lg p-2 flex items-center justify-center">
                             <img
                                 src={skill.url}
                                 alt={skill.name}

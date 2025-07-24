@@ -1,7 +1,9 @@
 
 export const NotFound = () => {
     return <div>
-        <StarBackground />
-        Not  Found Page
+        <div className="flex flex-center items-center">
+            <h1>404 Error! Page Not Found</h1>
+        </div>
+        
     </div>
 };

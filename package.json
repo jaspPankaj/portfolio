@@ -13,6 +13,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@formspree/react": "^3.0.0",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-toast": "^1.2.14",
     "@tabler/icons-react": "^3.34.0",

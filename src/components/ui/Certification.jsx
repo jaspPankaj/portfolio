@@ -126,7 +126,7 @@ export const Certification = ({
                         <h3 className="text-2xl font-bold text-foreground">
                             {certificates[active].name}
                         </h3>
-                        <p className="text-lg font-semibold text-primary mt-2">
+                        <p className="text-lg font-semibold text-primary">
                             {certificates[active].issuedBy}
                         </p>
                         <div className="mt-4">
