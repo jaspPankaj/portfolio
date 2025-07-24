@@ -8,7 +8,7 @@ const projects = [
     description: "I’ve built a responsive, modern portfolio that highlights my frontend development skills with React and Tailwind CSS.",
     image: "projects/project1.png",
     tags: ["React", "Tailwind"],
-    demoUrl: "#",
+    demoUrl: "https://jasppankaj.github.io/portfolio/",
     githubUrl: "https://github.com/jaspPankaj/portfolio"
   },
   {
@@ -18,7 +18,7 @@ const projects = [
     image: "projects/project2.png",
     tags: ["ASP.NET", "SQL Server","Syncfusion"],
     demoUrl: "#",
-    githubUrl: "#"
+    githubUrl: "https://github.com/jaspPankaj/Expense-Tracker"
   },
   {
     id: 3,

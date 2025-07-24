@@ -1,5 +1,6 @@
 import { cn } from "../lib/util";
-import{ Briefcase, Code, User } from "lucide-react";
+import{ Briefcase, Code, User , Github , Linkedin , Youtube} from "lucide-react";
+
 
 
 export const AboutSection = () =>{
@@ -29,6 +30,29 @@ export const AboutSection = () =>{
                                                     "text-primary hover:bg-primary/40 transition-all duration-300"
                         )}> Download Resume</a>
                     </div>
+                    <div className="pt-8">
+              <h4 className="font-large mb-4">Connect With Me</h4>
+              <div className="flex justify-center space-x-5">
+                <div className="p-3 rounded-full border border-foreground hover:bg-[#0A66C2] hover:border-0 hover:scale-110">
+                    <a
+                        href="https://www.linkedin.com/in/jasppankaj/" target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <Linkedin size={24} className="hover:scale-120"/>
+                    </a>
+                </div>
+                <div className="p-3 rounded-full border border-foreground hover:bg-white hover:text-black">
+                    <a href="https://github.com/jasppankaj" target="_blank" rel="noopener noreferrer">
+                        <Github size={24}  className="hover:scale-120"/>
+                    </a>
+                </div>
+                <div className="p-3 rounded-full border border-foreground hover:bg-[#FF0000] hover:border-0 hover:scale-110">
+                    <a href="https://www.youtube.com/@JaspPankaj" target="_blank">
+                        <Youtube size={24} className="hover:scale-120"/>
+                    </a>
+                </div>
+              </div>
+            </div>
 
                 </div>
 

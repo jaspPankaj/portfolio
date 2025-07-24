@@ -122,7 +122,7 @@ export const ContactSection = () => {
 
             {/* Social Links */}
             <div className="pt-8">
-              <h4 className="font-medium mb-4">Connect With Me</h4>
+              <h4 className="font-large mb-4">Connect With Me</h4>
               <div className="flex justify-center space-x-5">
                 <div className="p-3 rounded-full border border-foreground hover:bg-[#0A66C2] hover:border-0 hover:scale-110">
                     <a
