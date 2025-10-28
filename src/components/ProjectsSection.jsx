@@ -29,6 +29,33 @@ const projects = [
     demoUrl: "https://capsons.com/",
     githubUrl: "#"
   },
+  {
+    id: 4,
+    title: "Weather App",
+    description: "A clean, responsive web app that shows current weather details like temperature, humidity, wind speed, and a forecast using location detection or manual city search. Designed with simplicity and user experience in mind.",
+    image: "projects/project4.png",
+    tags: ["React Vite", "Tailwindcss", "Openwether API",],
+    demoUrl: "https://jasppankaj.github.io/weather/",
+    githubUrl: "https://github.com/jaspPankaj/weather"
+  },
+  {
+    id: 5,
+    title: "Calculator",
+    description: "A sleek, intuitive web-based calculator that performs basic arithmetic operations like addition, subtraction, multiplication, and division. Responsive and easy to use on desktop and mobile.",
+    image: "projects/project5.png",
+    tags: ["React", "Tailwindcss"],
+    demoUrl: "https://jasppankaj.github.io/Calculator/",
+    githubUrl: "https://github.com/jaspPankaj/Calculator"
+  },
+  {
+    id: 6,
+    title: "Elevare",
+    description: "Elevare is a career guidance web app using OpenAI for smart recommendations, Django REST API with Google Auth for backend, and React + Tailwind CSS for a responsive frontend.",
+    image: "projects/project6.png",
+    tags: ["Django","Python","Rest Framework","Google Auth","PostgreSQL","OpenAI",,"React", "Tailwindcss"],
+    demoUrl: "https://jasppankaj.github.io/elevare/",
+    githubUrl: "https://github.com/jaspPankaj/elevareProject"
+  },
 ];
 
 export const ProjectsSection = () => {

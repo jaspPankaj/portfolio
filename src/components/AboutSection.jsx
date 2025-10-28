@@ -50,7 +50,7 @@ export const AboutSection = () =>{
                     </a>
                 </div>
                 <div className="p-3 rounded-full border border-foreground hover:bg-[#FF0000] hover:border-0 hover:scale-110">
-                    <a href="https://www.youtube.com/@JaspPankaj" target="_blank">
+                    <a href="https://www.youtube.com/@IPTechWorriers" target="_blank">
                         <Youtube size={24} className="hover:scale-120"/>
                     </a>
                 </div>

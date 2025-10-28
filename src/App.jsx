@@ -5,7 +5,7 @@ import { Toaster } from "./components/ui/toaster";
 function App() {
   return (
     <>
-    <Toaster />
+    <Toaster position="top-right"/>
     <BrowserRouter basename="/portfolio">
       <Routes>
         <Route index element={<Home />} />

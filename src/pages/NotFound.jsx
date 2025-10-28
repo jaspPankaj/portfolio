@@ -2,7 +2,7 @@
 export const NotFound = () => {
     return <div>
         <div className="flex flex-center items-center">
-            <h1>404 Error! Page Not Found</h1>
+            <img src="/portfolio/notfound.png" alt="Not Found" className="w-full h-full object-contain"/>
         </div>
         
     </div>
