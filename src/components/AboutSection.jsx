@@ -26,11 +26,16 @@ export const AboutSection = () =>{
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
                         <a href="#contact" className="cosmic-button"> Get In Touch</a>
+<<<<<<< HEAD
                         <a  href="resume/Pankaj_Kumar_Resume_2025.pdf" 
                             download target="_blank" 
                             className={cn("px-6 py-2 rounded-full border border-primary",
                                             "text-primary hover:bg-primary/40 transition-all duration-300"
                             
+=======
+                        <a href="/Pankaj_Kumar_Resume_2025.pdf" download target="_blank" className={cn("px-6 py-2 rounded-full border border-primary",
+                                                    "text-primary hover:bg-primary/40 transition-all duration-300"
+>>>>>>> dd43c79377870b824ee6912ee7332b8a06430dc2
                         )}> Download Resume</a>
                     </div>
                     <div className="pt-8">
