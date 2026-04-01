@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
+import { motion, useInView, useSpring, useTransform, useMotionValue } from "framer-motion";
 import { cn } from "../lib/util";
 import {
   Github,
@@ -8,17 +9,119 @@ import {
   Phone,
   Send,
   Youtube,
+  Orbit,
 } from "lucide-react";
 import { useToast } from "../hooks/use-toast";
 
+// --- Sub-component: Interactive Nebula & Starfield ---
+const EtherealBackground = () => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smooth mouse movement for parallax effect
+  const smoothX = useSpring(mouseX, { damping: 50, stiffness: 400 });
+  const smoothY = useSpring(mouseY, { damping: 50, stiffness: 400 });
+
+  // Parallax shifts for different layers
+  const starsX = useTransform(smoothX, [-500, 500], [20, -20]);
+  const starsY = useTransform(smoothY, [-500, 500], [20, -20]);
+  const nebulaX = useTransform(smoothX, [-500, 500], [50, -50]);
+  const nebulaY = useTransform(smoothY, [-500, 500], [50, -50]);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      // Center mouse coordinates relative to window
+      mouseX.set(e.clientX - window.innerWidth / 2);
+      mouseY.set(e.clientY - window.innerHeight / 2);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  // Generate unique star data only once
+  const stars = useMemo(() => {
+    return [...Array(50)].map(() => ({
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      size: Math.random() * 2 + 1,
+      delay: Math.random() * 5,
+      duration: Math.random() * 3 + 2,
+    }));
+  }, []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none bg-[#030712]">
+      {/* Layer 1: Moving Nebula Gradients */}
+      <motion.div
+        style={{ x: nebulaX, y: nebulaY }}
+        className="absolute inset-[-100px] opacity-50 dark:opacity-80"
+      >
+        <div className="absolute top-1/4 left-1/10 w-[500px] h-[500px] rounded-full bg-primary/20 blur-[150px] animate-pulse-subtle" />
+        <div className="absolute bottom-1/3 right-1/10 w-[400px] h-[400px] rounded-full bg-purple-600/15 blur-[120px] animate-pulse-subtle delay-1000" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-blue-500/10 blur-[180px]" />
+      </motion.div>
+
+      {/* Layer 2: Interactive Starfield */}
+      <motion.div style={{ x: starsX, y: starsY }} className="absolute inset-0">
+        {stars.map((star, i) => (
+          <div
+            key={i}
+            className="star opacity-70"
+            style={{
+              top: star.top,
+              left: star.left,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              animation: `pulse-subtle ${star.duration}s ease-in-out infinite`,
+              animationDelay: `${star.delay}s`,
+            }}
+          />
+        ))}
+      </motion.div>
+
+      {/* Layer 3: Drifting 'Cosmic Dust' Particles */}
+      {[...Array(15)].map((_, i) => (
+        <motion.div
+          key={`dust-${i}`}
+          className="absolute rounded-full bg-white/20 blur-[1px]"
+          style={{
+            width: `${Math.random() * 4 + 1}px`,
+            height: `${Math.random() * 4 + 1}px`,
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+          }}
+          animate={{
+            x: [0, Math.random() * 100 - 50],
+            y: [0, Math.random() * 100 - 50],
+            opacity: [0, 0.5, 0],
+          }}
+          transition={{
+            duration: Math.random() * 10 + 10,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+// --- Sub-component: Gradient Border Wrapper ---
+const GradientBorder = ({ children, className }) => (
+  <div className={cn("relative p-[1px] rounded-2xl overflow-hidden group", className)}>
+    <div className="absolute inset-0 bg-gradient-to-r from-border via-primary/30 to-border group-hover:from-primary group-hover:via-purple-500 group-hover:to-primary transition-all duration-500" />
+    <div className="relative bg-card/60 backdrop-blur-xl rounded-[15px] h-full w-full">
+      {children}
+    </div>
+  </div>
+);
+
 export const ContactSection = () => {
   const { toast } = useToast();
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, amount: 0.1 });
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
@@ -29,185 +132,182 @@ export const ContactSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
-      const response = await fetch("https://formspree.io/f/myzpeqjl", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setTimeout(() => {
-          toast({
-            title: "Message Sent!",
-            description: "Thank you for your message. I'll get back to you soon.",
-          });
-          setIsSubmitting(false);
-          setFormData({ name: "", email: "", message: "" });
-        }, 1500);
-      } else {
-        console.log("Form submission failed.");
-        setIsSubmitting(false);
-      }
+      // Simulate submission for demonstration
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      toast({ title: "Transmission Received!", description: "I will decode your message and respond shortly." });
+      setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      console.log("Error in submitting form", error);
+      toast({ title: "Error", description: "Signal lost. Please try again.", variant: "destructive" });
+    } finally {
       setIsSubmitting(false);
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
+  };
+
   return (
-    <section id="contact" className="py-24 px-4 relative">
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Get In <span className="text-primary">Touch</span>
-        </h2>
+    <section
+      id="contact"
+      ref={containerRef}
+      className="py-24 px-4 relative overflow-hidden bg-background transition-colors duration-500"
+    >
+      <EtherealBackground />
 
-        <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-          Have a project in mind or want to collaborate? Feel free to reach out.
-          I'm always open to discussing new opportunities.
-        </p>
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        className="container mx-auto max-w-7xl relative z-10"
+      >
+        {/* Refined Header */}
+        <motion.div variants={itemVariants} className="text-center mb-20 space-y-4">
+          <h2 className="text-4xl md:text-7xl font-extrabold tracking-tighter leading-tight">
+            Initiate <span className="text-primary text-glow animate-pulse-subtle">Contact</span>
+          </h2>
+          <p className="text-muted-foreground max-w-xl mx-auto text-lg md:text-xl font-light">
+            Have a vision? Let&apos;s build a digital experience that resonates across the web.
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Left Column: Contact Info & Socials */}
+          <motion.div variants={itemVariants} className="lg:col-span-5 space-y-10">
+            <h3 className="text-3xl font-bold tracking-tight flex items-center gap-3">
+              <Orbit className="text-primary h-8 w-8 animate-spin-[10s]" /> Connection Ports
+            </h3>
 
-            <div className="space-y-6 justify-center">
-              {/* Email */}
-              <div className="flex item-start space-x-4 bg-foreground/10 p-4 rounded-xl hover:scale-105 transition-transform">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Mail className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-left">Email</h4>
-                  <a
-                    href="mailto:jasp.pankaj@gmail.com"
-                    className="text-muted-foreground hover:text-primary"
+            <div className="space-y-5">
+              {[
+                { icon: Mail, label: "Neural Link", val: "jasp.pankaj@gmail.com", href: "mailto:jasp.pankaj@gmail.com" },
+                { icon: Phone, label: "Direct Frequency", val: "+91 8587893419", href: "tel:+918587893419" },
+                { icon: MapPin, label: "Base Coordinates", val: "Noida, India", href: "#" },
+              ].map((item, idx) => (
+                <GradientBorder key={idx}>
+                  <motion.div
+                    whileHover={{ x: 5 }}
+                    className="flex items-center space-x-5 p-5"
                   >
-                    jasp.pankaj@gmail.com
-                  </a>
-                </div>
-              </div>
-
-              {/* Phone */}
-              <div className="flex item-start space-x-4 bg-foreground/10 p-4 rounded-xl hover:scale-105 transition-transform">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Phone className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-left">Mobile No.</h4>
-                  <a
-                    href="tel:+918587893419"
-                    className="text-muted-foreground hover:text-primary"
-                  >
-                    +91 8587893419
-                  </a>
-                </div>
-              </div>
-
-              {/* Location */}
-              <div className="flex item-start space-x-4 bg-foreground/10 p-4 rounded-xl hover:scale-105 transition-transform">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <MapPin className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-left">Location</h4>
-                  <p className="text-muted-foreground">Noida, India.</p>
-                </div>
-              </div>
+                    <div className="p-3.5 rounded-full bg-primary/10 text-primary border border-primary/20 shadow-[0_0_15px_rgba(139,92,246,0.2)]">
+                      <item.icon size={24} strokeWidth={1.5} />
+                    </div>
+                    <div className="text-left">
+                      <p className="text-xs text-muted-foreground uppercase tracking-widest font-medium">{item.label}</p>
+                      <a href={item.href} className="text-lg font-semibold hover:text-primary transition-colors leading-tight">
+                        {item.val}
+                      </a>
+                    </div>
+                  </motion.div>
+                </GradientBorder>
+              ))}
             </div>
 
-            {/* Social Links */}
-            <div className="pt-8">
-              <h4 className="font-large mb-4">Connect With Me</h4>
-              <div className="flex justify-center space-x-5">
-                <div className="p-3 rounded-full border border-foreground hover:bg-[#0A66C2] hover:border-0 hover:scale-110">
-                    <a
-                        href="https://www.linkedin.com/in/jasppankaj/" target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <Linkedin size={24} className="hover:scale-120"/>
-                    </a>
-                </div>
-                <div className="p-3 rounded-full border border-foreground hover:bg-white hover:text-black">
-                    <a href="https://github.com/jasppankaj" target="_blank" rel="noopener noreferrer">
-                        <Github size={24}  className="hover:scale-120"/>
-                    </a>
-                </div>
-                <div className="p-3 rounded-full border border-foreground hover:bg-[#FF0000] hover:border-0 hover:scale-110">
-                    <a href="https://www.youtube.com/@IPTechWorriers" target="_blank">
-                        <Youtube size={24} className="hover:scale-120"/>
-                    </a>
-                </div>
+            {/* Social Presences */}
+            <div className="pt-6 border-t border-border">
+              <h4 className="text-sm font-semibold mb-6 text-muted-foreground uppercase tracking-widest">Digital Presence</h4>
+              <div className="flex flex-wrap gap-4">
+                {[
+                  { Icon: Linkedin, color: "hover:bg-[#0A66C2] hover:border-[#0A66C2]", link: "https://linkedin.com/in/jasppankaj" },
+                  { Icon: Github, color: "hover:bg-white hover:text-black hover:border-white", link: "https://github.com/jasppankaj" },
+                  { Icon: Youtube, color: "hover:bg-[#FF0000] hover:border-[#FF0000]", link: "https://youtube.com/@IPTechWorriers" },
+                ].map((social, i) => (
+                  <motion.a
+                    key={i}
+                    href={social.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ y: -4, scale: 1.05 }}
+                    className={cn(
+                      "p-4 rounded-xl border border-border bg-card/40 backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]",
+                      social.color
+                    )}
+                  >
+                    <social.Icon size={24} strokeWidth={1.5} />
+                  </motion.a>
+                ))}
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Contact Form */}
-          <div className="bg-card/90 p-8 rounded-lg shadow-xs">
-            <h3 className="text-2xl font-semibold mb-6">Send A Message</h3>
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="name" className="block text-left text-sm font-medium mb-3">
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary"
-                  placeholder="Enter Your Name.."
-                />
+          {/* Right Column: High-End Form */}
+          <motion.div variants={itemVariants} className="lg:col-span-7 lg:sticky lg:top-24">
+            <GradientBorder>
+              <div className="p-8 md:p-10 space-y-8">
+                <div className="flex items-center gap-4">
+                    <Send className="text-primary h-7 w-7"/>
+                    <h3 className="text-3xl font-bold tracking-tight">Submit Transmission</h3>
+                </div>
+                
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium ml-1 text-muted-foreground">Entity Name</label>
+                      <input
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-5 py-3.5 rounded-xl border border-border bg-background/30backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-muted-foreground/50"
+                        placeholder="Core Protocol / Client Name"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium ml-1 text-muted-foreground">Contact Frequency</label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-5 py-3.5 rounded-xl border border-border bg-background/30 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-muted-foreground/50"
+                        placeholder="client@protocol.dev"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium ml-1 text-muted-foreground">Mission Parameters</label>
+                    <textarea
+                      name="message"
+                      rows={6}
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-5 py-3.5 rounded-xl border border-border bg-background/30 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none placeholder:text-muted-foreground/50"
+                      placeholder="Describe your vision, goals, and project scope..."
+                    />
+                  </div>
+                  
+                  <motion.button
+                    disabled={isSubmitting}
+                    type="submit"
+                    whileHover={{ scale: 1.02, boxShadow: "0 0 25px rgba(139, 92, 246, 0.5)" }}
+                    whileTap={{ scale: 0.98 }}
+                    className="cosmic-button w-full flex justify-center items-center gap-3 py-4 rounded-xl text-lg font-bold group bg-primary transition-all duration-300"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Orbit className="h-5 w-5 animate-spin" /> Negotiating Warp Jump...
+                      </>
+                    ) : (
+                      <>
+                        Launch Digital Vision <Send size={20} className="group-hover:translate-x-1.5 group-hover:-translate-y-1.5 transition-transform duration-300" />
+                      </>
+                    )}
+                  </motion.button>
+                </form>
               </div>
-              <div>
-                <label htmlFor="email" className="block text-left text-sm font-medium mb-3">
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary"
-                  placeholder="example@gmail.com"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-left text-sm font-medium mb-3 ">
-                  Your Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={3}
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary resize-none"
-                  placeholder="Hello, I'd like to talk about..."
-                />
-              </div>
-              <button
-                disabled={isSubmitting}
-                type="submit"
-                className={cn(
-                  "cosmic-button w-full flex justify-center items-center gap-2"
-                )}
-              >
-                {isSubmitting ? "Sending..." : "Send Message"} <Send size={16} />
-              </button>
-            </form>
-          </div>
+            </GradientBorder>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

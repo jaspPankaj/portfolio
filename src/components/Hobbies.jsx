@@ -11,7 +11,7 @@ const hobbies = [
     gridClass: "md:col-span-2 md:row-span-2", // Large Featured Card
     bg: "bg-orange-500/10",
     border: "group-hover:border-orange-500/50",
-    media: "/basketball-highlight.mp4" 
+    media: "/portfolio/Hobbies/Basketball.jpg" 
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const hobbies = [
     gridClass: "md:col-span-2 md:row-span-1", // Wide Card
     bg: "bg-blue-500/10",
     border: "group-hover:border-blue-500/50",
-    media: "/content-creation.jpg"
+    media: "/portfolio/Hobbies/Content.png"
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const hobbies = [
     gridClass: "md:col-span-1 md:row-span-1", // Small Square
     bg: "bg-purple-500/10",
     border: "group-hover:border-purple-500/50",
-    media: "/editing-clip.mp4"
+    media: "/portfolio/Hobbies/Editing.jpg"
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ const hobbies = [
     gridClass: "md:col-span-1 md:row-span-1", // Small Square
     bg: "bg-red-500/10",
     border: "group-hover:border-red-500/50",
-    media: "/gaming.jpg"
+    media: "/portfolio/Hobbies/Egame.jpg"
   }
 ];
 
