@@ -4,21 +4,21 @@ import { ArrowRight, ExternalLink, GithubIcon } from "lucide-react";
 const projects = [
   {
     id: 1,
-    title: "Portfolio Website",
-    description: "I’ve built a responsive, modern portfolio that highlights my frontend development skills with React and Tailwind CSS.",
-    image: "projects/project1.png",
-    tags: ["React", "Tailwind"],
-    demoUrl: "https://jasppankaj.github.io/portfolio/",
-    githubUrl: "https://github.com/jaspPankaj/portfolio"
+    title: "Prabodha By AKS",
+    description: "A fully responsive, modern website for AKS INDIA GROUP built with React, TailwindCSS, and Framer Motion. Features smooth animations, clean UI, and optimized performance, hosted on Hostinger to showcase Yoga, medit ation services effectively.",
+    image: "projects/prabodha.png",
+    tags: ["React", "Tailwind Css", "Framer Motion" , "Hostinger"],
+    demoUrl: "https://prabodhaaks.com/",
+    githubUrl: "#"
   },
   {
     id: 2,
-    title: "Expense Tracker",
-    description: " developed a dynamic and responsive Expense Tracker web application that enables users to manage their finances effectively while providing visual analytics using Syncfusion.",
-    image: "projects/project2.png",
-    tags: ["ASP.NET", "SQL Server","Syncfusion"],
-    demoUrl: "#",
-    githubUrl: "https://github.com/jaspPankaj/Expense-Tracker"
+    title: "Elevare",
+    description: "Elevare is a career guidance web app using OpenAI for smart recommendations, Django REST API with Google Auth for backend, and React + Tailwind CSS for a responsive frontend.",
+    image: "projects/project6.png",
+    tags: ["Django","Python","Rest Framework","Google Auth","PostgreSQL","OpenAI",,"React", "Tailwindcss"],
+    demoUrl: "https://jasppankaj.github.io/elevare/",
+    githubUrl: "https://github.com/jaspPankaj/elevareProject"
   },
   {
     id: 3,
@@ -31,6 +31,25 @@ const projects = [
   },
   {
     id: 4,
+    title: "Weekly Muse",
+    description: "A sleek, intuitive web-based calculator that performs basic arithmetic operations like addition, subtraction, multiplication, and division. Responsive and easy to use on desktop and mobile.",
+    image: "projects/image.png",
+    tags: ["Python", "Django","Full Stack"],
+    demoUrl: "https://theweeklymuse.onrender.com/",
+    githubUrl: "#"
+  },
+  {
+    id: 5,
+    title: "Expense Tracker",
+    description: " developed a dynamic and responsive Expense Tracker web application that enables users to manage their finances effectively while providing visual analytics using Syncfusion.",
+    image: "projects/project2.png",
+    tags: ["ASP.NET", "SQL Server","Syncfusion"],
+    demoUrl: "#",
+    githubUrl: "https://github.com/jaspPankaj/Expense-Tracker"
+  },  
+  
+  {
+    id: 6,
     title: "Weather App",
     description: "A clean, responsive web app that shows current weather details like temperature, humidity, wind speed, and a forecast using location detection or manual city search. Designed with simplicity and user experience in mind.",
     image: "projects/project4.png",
@@ -38,24 +57,8 @@ const projects = [
     demoUrl: "https://jasppankaj.github.io/weather/",
     githubUrl: "https://github.com/jaspPankaj/weather"
   },
-  {
-    id: 5,
-    title: "Calculator",
-    description: "A sleek, intuitive web-based calculator that performs basic arithmetic operations like addition, subtraction, multiplication, and division. Responsive and easy to use on desktop and mobile.",
-    image: "projects/project5.png",
-    tags: ["React", "Tailwindcss"],
-    demoUrl: "https://jasppankaj.github.io/Calculator/",
-    githubUrl: "https://github.com/jaspPankaj/Calculator"
-  },
-  {
-    id: 6,
-    title: "Elevare",
-    description: "Elevare is a career guidance web app using OpenAI for smart recommendations, Django REST API with Google Auth for backend, and React + Tailwind CSS for a responsive frontend.",
-    image: "projects/project6.png",
-    tags: ["Django","Python","Rest Framework","Google Auth","PostgreSQL","OpenAI",,"React", "Tailwindcss"],
-    demoUrl: "https://jasppankaj.github.io/elevare/",
-    githubUrl: "https://github.com/jaspPankaj/elevareProject"
-  },
+  
+  
 ];
 
 export const ProjectsSection = () => {
