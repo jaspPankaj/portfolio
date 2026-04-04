@@ -166,7 +166,7 @@
 
 @utility text-glow {
   @apply relative;
-  text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+  text-shadow: 0 0 10px rgba(167, 139, 250, 0.3);
 }
 
 @utility card-hover{
@@ -202,10 +202,15 @@
 }
 
 
-#root{
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 0;
-  text-align: center;
+@utility mainContainer{
+  @apply relative min-h-screen py-24 px-6 sm:px-8 md:px-12 overflow-hidden;
+}
+
+@utility insideContainer{
+  @apply max-w-7xl mx-auto;
+}
+
+@utility rowFlex{
+  @apply flex items-center justify-center;
 }
 

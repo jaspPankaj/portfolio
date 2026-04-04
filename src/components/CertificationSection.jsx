@@ -38,11 +38,11 @@ export function CertificationSection() {
   const displayCerts = [...certificates, ...certificates]; // Double for infinite scroll
 
   return (
-    <section id="certificates" className="py-24 relative overflow-hidden bg-background">
+    <div className="mainContainer">
       {/* Background Ambience */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.05)_0,transparent_70%)]" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container insideContainer relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -81,7 +81,7 @@ export function CertificationSection() {
         <span className="font-bold text-2xl tracking-widest text-muted-foreground">COURSERA</span>
         <span className="font-bold text-2xl tracking-widest text-muted-foreground">SCRIMBA</span>
       </div>
-    </section>
+    </div>
   );
 }
 

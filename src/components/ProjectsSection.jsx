@@ -181,12 +181,12 @@ export const ProjectsSection = () => {
   };
 
   return (
-    <section id="project" className="py-24 px-4 relative overflow-hidden bg-[#030712]">
+    <div className="mainContainer">
       
       {/* 🌌 FASCINATING BLOBS BACKGROUND LAYER 🌌 */}
       <CelestialBlobBackground />
 
-      <div className="container mx-auto max-w-7xl relative z-10">
+      <div className="container insideContainer">
         {/* Header Section (unchanged from engineering style) */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
@@ -323,6 +323,6 @@ export const ProjectsSection = () => {
           </a>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 };

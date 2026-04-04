@@ -47,8 +47,8 @@ const hobbies = [
 
 export const Hobbies = () => {
   return (
-    <section id="hobbies" className="py-24 px-4 bg-background overflow-hidden">
-      <div className="container max-w-6xl mx-auto">
+    <div className="mainContainer">
+      <div className="container insideContainer">
         
         {/* Header */}
         <div className="flex flex-col items-center lg:items-start mb-12 space-y-4">
@@ -112,6 +112,6 @@ export const Hobbies = () => {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };

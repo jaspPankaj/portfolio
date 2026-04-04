@@ -1,4 +1,4 @@
-import { ThemeToggle } from "../components/ThemeToggle";
+
 import {NavBar} from "../components/NavBar";
 import { HeroSection } from "../components/HeroSection";
 import { AboutSection } from "../components/AboutSection";
@@ -11,9 +11,7 @@ import { CertificationSection } from "../components/CertificationSection";
 import { Hobbies } from "../components/Hobbies";
 
 export const Home = () => {
-    return <div className="min-h-screen bg-background text-forehead overflow_x_hidden">
-
-        <ThemeToggle />
+    return <>      
 
         {/* Background Effact Code */}
         <ParticleBackground />
@@ -22,17 +20,17 @@ export const Home = () => {
         <NavBar />
 
         {/* Main Content Code */}
-        <main>            
-            <HeroSection />
-            <AboutSection />
-            <SkillsSection/>
-            <ProjectsSection />
-            <CertificationSection />
-            <Hobbies />
-            <ContactSection />            
+        <main >            
+            <section id="hero"><HeroSection /></section>
+            <section id="about"><AboutSection /></section>
+            <section id="skill"><SkillsSection/></section>
+            <section id="project"><ProjectsSection /></section>
+            <section id="certificates"><CertificationSection /></section>
+            <section id="hobbies"><Hobbies /></section>
+            <section id="contact"><ContactSection /></section>
         </main>
         
         {/* Footer Code */}
             <Footer />
-    </div>
+    </>
 }

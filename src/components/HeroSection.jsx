@@ -1,17 +1,11 @@
-import { ArrowDown, Zap, Code, Sparkles } from "lucide-react";
+import { ArrowDown, Zap, Code, Sparkles, Mouse } from "lucide-react";
 import { cn } from "../lib/util";
 
 export const HeroSection = () => {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden bg-background">
+    <div  className="mainContainer rowFlex">
       
-      {/* --- CELESTIAL BACKGROUND ELEMENTS --- */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <div className="absolute top-[10%] left-[5%] w-72 h-72 bg-primary/10 rounded-full blur-[120px] animate-pulse-subtle" />
-        <div className="absolute bottom-[10%] right-[5%] w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] animate-bloom" />
-      </div>
-
-      <div className="container max-w-7xl mx-auto relative z-10">
+      <div className="container insideContainer">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           
           {/* LEFT CONTENT: MINIMAL & STYLISH */}
@@ -53,7 +47,7 @@ export const HeroSection = () => {
               <div className="absolute inset-0 border border-primary/20 rounded-[3rem] rotate-3 scale-105 animate-[spin_20s_linear_infinite]" />
               
               {/* The "Portal" Image Container */}
-              <div className="relative w-full h-full rounded-[3rem] overflow-hidden border-2 border-primary/40 shadow-[0_0_50px_rgba(139,92,246,0.2)] bg-card">
+              <div className="relative w-full h-full rounded-[3rem] overflow-hidden border-2 border-primary/60 shadow-[0_0_50px_rgba(139,92,246,0.1)] bg-card">
                 <img 
                   src="/portfolio/pankaj.png" // REPLACE WITH YOUR PHOTO PATH
                   alt="Pankaj Kumar"
@@ -88,9 +82,9 @@ export const HeroSection = () => {
       {/* SCROLL INDICATOR */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center group cursor-pointer opacity-0 animate-fade-in-delay-4">
         <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3 group-hover:text-primary transition-colors">Scroll</span>
-        <div className="h-10 w-[1px] bg-gradient-to-b from-primary to-transparent animate-bounce" />
+        <Mouse className="h-8 w-8 animate-bounce"/>
       </div>
 
-    </section>
+    </div>
   );
 };

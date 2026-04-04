@@ -64,12 +64,12 @@ const FloatingLogo = ({ skill }) => {
 
 export const SkillsSection = () => {
     return (
-        <section id="skill" className="py-24 px-4 relative overflow-hidden bg-background">
+        <div className="mainContainer">
             {/* Background Bloom/Glow effects using your utility */}
             <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-[120px] animate-bloom pointer-events-none" />
             
-            <div className="container mx-auto max-w-6xl relative z-10">
-                <div className="text-center mb-20 animate-fade-in">
+            <div className="container insideContainer">
+                <div className="text-center mb-8 animate-fade-in">
                     <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 text-glow">
                         My <span className="text-primary">Expertise</span>
                     </h2>
@@ -83,8 +83,8 @@ export const SkillsSection = () => {
                     
                     {/* Ghosted Center Text */}
                     <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none">
-                        <h3 className="text-[12vw] font-black text-primary opacity-[0.03] leading-none tracking-tighter uppercase">
-                            Fullstack
+                        <h3 className="text-[8vw] font-black text-primary opacity-[0.06] leading-none tracking-widest uppercase">
+                            Full stack
                         </h3>
                     </div>
 
@@ -97,6 +97,6 @@ export const SkillsSection = () => {
                     <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,transparent_40%,rgba(0,0,0,0.05)_100%)]" />
                 </div>
             </div>
-        </section>
+        </div>
     );
 };

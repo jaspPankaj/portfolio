@@ -1,5 +1,5 @@
-import { useState, useRef, useMemo, useEffect } from "react";
-import { motion, useInView, useSpring, useTransform, useMotionValue } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { cn } from "../lib/util";
 import {
   Github,
@@ -12,99 +12,6 @@ import {
   Orbit,
 } from "lucide-react";
 import { useToast } from "../hooks/use-toast";
-
-// --- Sub-component: Interactive Nebula & Starfield ---
-const EtherealBackground = () => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // Smooth mouse movement for parallax effect
-  const smoothX = useSpring(mouseX, { damping: 50, stiffness: 400 });
-  const smoothY = useSpring(mouseY, { damping: 50, stiffness: 400 });
-
-  // Parallax shifts for different layers
-  const starsX = useTransform(smoothX, [-500, 500], [20, -20]);
-  const starsY = useTransform(smoothY, [-500, 500], [20, -20]);
-  const nebulaX = useTransform(smoothX, [-500, 500], [50, -50]);
-  const nebulaY = useTransform(smoothY, [-500, 500], [50, -50]);
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      // Center mouse coordinates relative to window
-      mouseX.set(e.clientX - window.innerWidth / 2);
-      mouseY.set(e.clientY - window.innerHeight / 2);
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
-
-  // Generate unique star data only once
-  const stars = useMemo(() => {
-    return [...Array(50)].map(() => ({
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      size: Math.random() * 2 + 1,
-      delay: Math.random() * 5,
-      duration: Math.random() * 3 + 2,
-    }));
-  }, []);
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none bg-[#030712]">
-      {/* Layer 1: Moving Nebula Gradients */}
-      <motion.div
-        style={{ x: nebulaX, y: nebulaY }}
-        className="absolute inset-[-100px] opacity-50 dark:opacity-80"
-      >
-        <div className="absolute top-1/4 left-1/10 w-[500px] h-[500px] rounded-full bg-primary/20 blur-[150px] animate-pulse-subtle" />
-        <div className="absolute bottom-1/3 right-1/10 w-[400px] h-[400px] rounded-full bg-purple-600/15 blur-[120px] animate-pulse-subtle delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-blue-500/10 blur-[180px]" />
-      </motion.div>
-
-      {/* Layer 2: Interactive Starfield */}
-      <motion.div style={{ x: starsX, y: starsY }} className="absolute inset-0">
-        {stars.map((star, i) => (
-          <div
-            key={i}
-            className="star opacity-70"
-            style={{
-              top: star.top,
-              left: star.left,
-              width: `${star.size}px`,
-              height: `${star.size}px`,
-              animation: `pulse-subtle ${star.duration}s ease-in-out infinite`,
-              animationDelay: `${star.delay}s`,
-            }}
-          />
-        ))}
-      </motion.div>
-
-      {/* Layer 3: Drifting 'Cosmic Dust' Particles */}
-      {[...Array(15)].map((_, i) => (
-        <motion.div
-          key={`dust-${i}`}
-          className="absolute rounded-full bg-white/20 blur-[1px]"
-          style={{
-            width: `${Math.random() * 4 + 1}px`,
-            height: `${Math.random() * 4 + 1}px`,
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            x: [0, Math.random() * 100 - 50],
-            y: [0, Math.random() * 100 - 50],
-            opacity: [0, 0.5, 0],
-          }}
-          transition={{
-            duration: Math.random() * 10 + 10,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-      ))}
-    </div>
-  );
-};
 
 // --- Sub-component: Gradient Border Wrapper ---
 const GradientBorder = ({ children, className }) => (
@@ -132,18 +39,40 @@ export const ContactSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+
     try {
-      // Simulate submission for demonstration
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      toast({ title: "Transmission Received!", description: "I will decode your message and respond shortly." });
-      setFormData({ name: "", email: "", message: "" });
+      const response = await fetch("https://formspree.io/f/myzpeqjl", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        toast({ 
+          title: "Transmission Received!", 
+          description: "I will decode your message and respond shortly." 
+        });
+        // Reset form on success
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Submission failed");
+      }
     } catch (error) {
-      toast({ title: "Error", description: "Signal lost. Please try again.", variant: "destructive" });
+      toast({ 
+        title: "Signal Lost", 
+        description: "Could not establish connection. Please try again.", 
+        variant: "destructive" 
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  // Animation Variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
@@ -155,20 +84,14 @@ export const ContactSection = () => {
   };
 
   return (
-    <section
-      id="contact"
-      ref={containerRef}
-      className="py-24 px-4 relative overflow-hidden bg-background transition-colors duration-500"
-    >
-      <EtherealBackground />
-
+    <div ref={containerRef} className="mainContainer transition-colors duration-500">
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="container mx-auto max-w-7xl relative z-10"
+        className="container insideContainer"
       >
-        {/* Refined Header */}
+        {/* Header Section */}
         <motion.div variants={itemVariants} className="text-center mb-20 space-y-4">
           <h2 className="text-4xl md:text-7xl font-extrabold tracking-tighter leading-tight">
             Initiate <span className="text-primary text-glow animate-pulse-subtle">Contact</span>
@@ -237,30 +160,30 @@ export const ContactSection = () => {
             </div>
           </motion.div>
 
-          {/* Right Column: High-End Form */}
+          {/* Right Column: Contact Form */}
           <motion.div variants={itemVariants} className="lg:col-span-7 lg:sticky lg:top-24">
             <GradientBorder>
               <div className="p-8 md:p-10 space-y-8">
                 <div className="flex items-center gap-4">
-                    <Send className="text-primary h-7 w-7"/>
-                    <h3 className="text-3xl font-bold tracking-tight">Submit Transmission</h3>
+                  <Send className="text-primary h-7 w-7"/>
+                  <h3 className="text-3xl font-bold tracking-tight">Submit Transmission</h3>
                 </div>
                 
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-sm font-medium ml-1 text-muted-foreground">Entity Name</label>
+                      <label className="text-sm font-medium ml-1 text-muted-foreground">Full Name</label>
                       <input
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-5 py-3.5 rounded-xl border border-border bg-background/30backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-muted-foreground/50"
-                        placeholder="Core Protocol / Client Name"
+                        className="w-full px-5 py-3.5 rounded-xl border border-border bg-background/30 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-muted-foreground/50"
+                        placeholder="Enter Your Name..."
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-medium ml-1 text-muted-foreground">Contact Frequency</label>
+                      <label className="text-sm font-medium ml-1 text-muted-foreground">Email</label>
                       <input
                         type="email"
                         name="email"
@@ -268,12 +191,12 @@ export const ContactSection = () => {
                         onChange={handleChange}
                         required
                         className="w-full px-5 py-3.5 rounded-xl border border-border bg-background/30 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-muted-foreground/50"
-                        placeholder="client@protocol.dev"
+                        placeholder="email@gmail.com"
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium ml-1 text-muted-foreground">Mission Parameters</label>
+                    <label className="text-sm font-medium ml-1 text-muted-foreground">Your Message</label>
                     <textarea
                       name="message"
                       rows={6}
@@ -290,15 +213,15 @@ export const ContactSection = () => {
                     type="submit"
                     whileHover={{ scale: 1.02, boxShadow: "0 0 25px rgba(139, 92, 246, 0.5)" }}
                     whileTap={{ scale: 0.98 }}
-                    className="cosmic-button w-full flex justify-center items-center gap-3 py-4 rounded-xl text-lg font-bold group bg-primary transition-all duration-300"
+                    className="cosmic-button w-full flex justify-center items-center gap-3 py-4 rounded-xl text-lg font-bold group bg-primary text-primary-foreground transition-all duration-300 disabled:opacity-70"
                   >
                     {isSubmitting ? (
                       <>
-                        <Orbit className="h-5 w-5 animate-spin" /> Negotiating Warp Jump...
+                        <Orbit className="h-5 w-5 animate-spin" /> Sending Message...
                       </>
                     ) : (
                       <>
-                        Launch Digital Vision <Send size={20} className="group-hover:translate-x-1.5 group-hover:-translate-y-1.5 transition-transform duration-300" />
+                        Send Message <Send size={20} className="group-hover:translate-x-1.5 group-hover:-translate-y-1.5 transition-transform duration-300" />
                       </>
                     )}
                   </motion.button>
@@ -308,6 +231,6 @@ export const ContactSection = () => {
           </motion.div>
         </div>
       </motion.div>
-    </section>
+    </div>
   );
 };
