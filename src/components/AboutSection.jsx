@@ -51,7 +51,7 @@ export const AboutSection = () => {
               interfaces.
             </p>
 
-            <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex flex-wrap justify-center gap-4 pt-4">
               {/* Primary Button: Cosmic Glow Effect */}
               <motion.a
                 href="#contact"

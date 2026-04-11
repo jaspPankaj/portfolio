@@ -9,7 +9,6 @@ const certificates = [
     issuedBy: "Meta",
     skills: ["React", "Python", "Django", "PostgreSQL"],
     description: "Mastered end-to-end web architecture and deployment strategies.",
-    src: "certificates/MetaFullStack.png",
     url: "https://www.coursera.org/account/accomplishments/verify/M46BF5B2KBIP",
     color: "from-blue-500/20 to-cyan-500/20"
   },
@@ -18,7 +17,6 @@ const certificates = [
     issuedBy: "Meta",
     skills: ["Hooks", "JSX", "Virtual DOM"],
     description: "Deep dive into component-based UI and state management.",
-    src: "certificates/MetaReact.png",
     url: "https://coursera.org/verify/TZ2QSTQU0XM0",
     color: "from-purple-500/20 to-pink-500/20"
   },
@@ -27,11 +25,66 @@ const certificates = [
     issuedBy: "Meta",
     skills: ["SQL", "Data Modeling", "Optimization"],
     description: "Expertise in designing scalable relational database schemas.",
-    src: "certificates/MetaSQL.png",
     url: "https://www.coursera.org/account/accomplishments/verify/LL362UKCQU6B",
     color: "from-emerald-500/20 to-teal-500/20"
   },
-  // Copy of certificates for infinite loop
+  {
+    name: "MICROSOFT CERTIFIED PROFESSIONAL",
+    issuedBy: "MICROSOFT",
+    skills: ["CERTIFIED PROFESSIONAL" ],
+    description: "Microsoft Certified Professional (MCP) with foundational expertise in Microsoft technologies and core IT concepts, including implementation and troubleshooting of solutions.",
+    url: "#",
+    color: "from-blue-500/20 to-cyan-500/20"
+  },
+  {
+    name: "ASP.NET MVC",
+    issuedBy: "MICROSOFT",
+    skills: ["ASP.NET", "MVC"],
+    description: "Developing ASP.NET MVC Web Applications",
+    url: "#",
+    color: "from-purple-500/20 to-pink-500/20"
+  },
+  
+  {
+    name: "Meta Certified Version Control",
+    issuedBy: "Meta",
+    skills: ["GIT", "Version Control" ],
+    description: "Implement Version Control systems, Use a GitHub repository. Create a GitHub repository",
+    url: "https://www.coursera.org/account/accomplishments/verify/5X984GWL3U9P",
+    color: "from-blue-500/20 to-cyan-500/20"
+  },
+  {
+    name: "Programming in Python",
+    issuedBy: "Meta",
+    skills: ["Python", "Django (Web Framework)", "Data Structures"],
+    description: "Foundational programming skills with basic Python Syntax.",
+    url: "https://www.coursera.org/account/accomplishments/verify/A81AS1G8WM1J",
+    color: "from-emerald-500/20 to-teal-500/20"
+  },
+  {
+    name: "Django Web Framework",
+    issuedBy: "META",
+    skills: ["Django (Web Framework)", "Web Applications","Back-End Web Development","Model View Controller"],
+    description: "Build a web server, Data modeling , Implement web security best practices",
+    url: "https://www.coursera.org/account/accomplishments/verify/C70O7MANXIGI",
+    color: "from-purple-500/20 to-pink-500/20"
+  },
+   {
+    name: "Back-End Development",
+    issuedBy: "Meta",
+    skills: ["Back-End", "Development","HTML", "CSS", "UI FRAMEWORK" ],
+    description: "Distinguish between front-end, back-end, and full-stack developers.",
+    url: "https://www.coursera.org/account/accomplishments/verify/PLN1PW9SIRG2",
+    color: "from-blue-500/20 to-cyan-500/20"
+  },
+  {
+    name: "Databases for Back-End Development",
+    issuedBy: "Meta",
+    skills: ["MySQL", "Database Management Systems", "Query Languages","Databases"],
+    description: "Concepts and principles that underpin how databases work. Plan and execute a simple database development project.",
+    url: "https://www.coursera.org/account/accomplishments/verify/A81AS1G8WM1J",
+    color: "from-emerald-500/20 to-teal-500/20"
+  },
 ];
 
 export function CertificationSection() {
@@ -46,7 +99,7 @@ export function CertificationSection() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-4"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-tighter mb-4">
             <ShieldCheck size={14} /> 100% Verified Credentials
@@ -73,13 +126,6 @@ export function CertificationSection() {
             <CertificationCard key={idx} cert={cert} />
           ))}
         </motion.div>
-      </div>
-
-      {/* Bottom Decoration */}
-      <div className="mt-12 flex justify-center gap-8 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
-        <span className="font-bold text-2xl tracking-widest text-muted-foreground">META</span>
-        <span className="font-bold text-2xl tracking-widest text-muted-foreground">COURSERA</span>
-        <span className="font-bold text-2xl tracking-widest text-muted-foreground">SCRIMBA</span>
       </div>
     </div>
   );

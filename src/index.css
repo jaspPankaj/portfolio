@@ -185,25 +185,15 @@
          hover:scale-105 active:scale-95;
 }
 
-@utility star {
-  @apply absolute rounded-full bg-white;
-  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
-}
 
-@utility meteor {
-  @apply absolute bg-linear-to-r from-white via-white to-transparent rounded-full;
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-}
 
-@utility bloom {
-  @apply absolute;
-  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
-  opacity: 0.4;
-}
+
+
+
 
 
 @utility mainContainer{
-  @apply relative min-h-screen py-24 px-6 sm:px-8 md:px-12 overflow-hidden;
+  @apply relative min-h-screen py-24 px-2 sm:px-4 md:px-12 lg:px-16 overflow-hidden;
 }
 
 @utility insideContainer{
